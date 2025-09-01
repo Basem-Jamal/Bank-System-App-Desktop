@@ -38,9 +38,14 @@ namespace Bank_System_App
             MessageBox.Show("المبلغ الذي ادخلته اكبر من رصيدك الحالي!");
         }
 
-        public HomeMain(string nameFromForm1, float balance)
+        public HomeMain(string nameFromForm1, float balance , string Validity)
         {
             InitializeComponent();
+
+            if (Validity == "User")
+            {
+                menuStrip1.Hide();
+            }
             labelName.Text = nameFromForm1;
             currentBalance = balance;
             labelBalance.Text = currentBalance.ToString("F2") + "SR";
@@ -52,6 +57,9 @@ namespace Bank_System_App
             labelWithdraw.Text = "0.00";
             labelTransfer.Text = "---";
 
+
+
+            
             // تمكين DoubleBuffering لمنع الوميض
             this.DoubleBuffered = true;
         }

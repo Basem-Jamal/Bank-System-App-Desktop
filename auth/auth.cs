@@ -63,9 +63,9 @@ namespace Bank_System_App
 
             if (user != null) 
             {
-                MessageBox.Show("مرحبا بك $:{user.name}");
+                MessageBox.Show("Hello " , user._accountNumber);
                 this.Hide();
-                HomeMain HomeFormAdmin = new HomeMain(user._name , 1000);
+                HomeMain HomeFormAdmin = new HomeMain(user._name , 1000, user._Validity);
                 HomeFormAdmin.Show();
             }
             else

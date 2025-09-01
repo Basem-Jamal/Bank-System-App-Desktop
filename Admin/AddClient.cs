@@ -19,6 +19,7 @@ namespace Bank_System_App
             public string _password = "";
             public string _accountNumber = "";
             public string _balance = "";
+            public string _Validity;
 
         }
 
@@ -36,7 +37,7 @@ namespace Bank_System_App
             u._password = InputNewPassword.Text;
             u._accountNumber = InputNewAccountNumber.Text;
             u._balance = InputNewBalance.Text;
-
+            u._Validity = "User";
             HomeMain.users.Add(u);
        
 
