@@ -100,7 +100,7 @@
             panelMenu.Controls.Add(showWithdraw);
             panelMenu.Controls.Add(showDeposit);
             panelMenu.Controls.Add(showBalance);
-            panelMenu.Location = new Point(23, 52);
+            panelMenu.Location = new Point(12, 53);
             panelMenu.Name = "panelMenu";
             panelMenu.Size = new Size(843, 137);
             panelMenu.TabIndex = 1;
@@ -146,7 +146,7 @@
             // 
             panelShowBalance.BackColor = Color.Transparent;
             panelShowBalance.Controls.Add(panelBalanceSmall);
-            panelShowBalance.Location = new Point(939, 222);
+            panelShowBalance.Location = new Point(926, 229);
             panelShowBalance.Name = "panelShowBalance";
             panelShowBalance.Size = new Size(628, 304);
             panelShowBalance.TabIndex = 2;
@@ -215,7 +215,7 @@
             panelDeposit.Controls.Add(InputDeposit);
             panelDeposit.Controls.Add(confirm_deposit);
             panelDeposit.Controls.Add(titleDeposit);
-            panelDeposit.Location = new Point(1057, 222);
+            panelDeposit.Location = new Point(1044, 229);
             panelDeposit.Name = "panelDeposit";
             panelDeposit.Size = new Size(416, 465);
             panelDeposit.TabIndex = 3;
@@ -273,7 +273,7 @@
             panelWithdraw.Controls.Add(InputWithdraw);
             panelWithdraw.Controls.Add(confirm_withdraw);
             panelWithdraw.Controls.Add(titleWithdraw);
-            panelWithdraw.Location = new Point(1057, 222);
+            panelWithdraw.Location = new Point(1044, 229);
             panelWithdraw.Name = "panelWithdraw";
             panelWithdraw.Size = new Size(416, 465);
             panelWithdraw.TabIndex = 4;
@@ -330,7 +330,7 @@
             panelInfoContact.BackColor = Color.Transparent;
             panelInfoContact.Controls.Add(welcomeName);
             panelInfoContact.Controls.Add(labelName);
-            panelInfoContact.Location = new Point(1042, 52);
+            panelInfoContact.Location = new Point(1031, 53);
             panelInfoContact.Name = "panelInfoContact";
             panelInfoContact.Size = new Size(478, 137);
             panelInfoContact.TabIndex = 4;
@@ -387,7 +387,7 @@
             panelDashboard.BackColor = Color.Transparent;
             panelDashboard.Controls.Add(panelTransferSmall);
             panelDashboard.Controls.Add(panelWithdrawSmall);
-            panelDashboard.Location = new Point(23, 222);
+            panelDashboard.Location = new Point(10, 229);
             panelDashboard.Name = "panelDashboard";
             panelDashboard.Size = new Size(843, 465);
             panelDashboard.TabIndex = 3;
@@ -479,19 +479,24 @@
             // backgPanel
             // 
             backgPanel.BackColor = Color.Gainsboro;
+            backgPanel.Controls.Add(panelDashboard);
             backgPanel.Controls.Add(btnSignOut);
+            backgPanel.Controls.Add(panelWithdraw);
+            backgPanel.Controls.Add(panelDeposit);
             backgPanel.Controls.Add(panelInfoContact);
             backgPanel.Controls.Add(panelMenu);
-            backgPanel.Location = new Point(0, -15);
+            backgPanel.Controls.Add(panelShowBalance);
+            backgPanel.Dock = DockStyle.Fill;
+            backgPanel.Location = new Point(0, 0);
             backgPanel.Name = "backgPanel";
-            backgPanel.Size = new Size(1638, 914);
+            backgPanel.Size = new Size(1579, 867);
             backgPanel.TabIndex = 6;
             backgPanel.Paint += backgPanel_Paint;
             // 
             // btnSignOut
             // 
             btnSignOut.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnSignOut.Location = new Point(35, 810);
+            btnSignOut.Location = new Point(31, 790);
             btnSignOut.Name = "btnSignOut";
             btnSignOut.Size = new Size(140, 46);
             btnSignOut.TabIndex = 5;
@@ -506,12 +511,8 @@
             BackColor = Color.FromArgb(64, 64, 64);
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(1579, 867);
-            Controls.Add(panelDashboard);
-            Controls.Add(panelWithdraw);
-            Controls.Add(panelDeposit);
             Controls.Add(menuStrip1);
             Controls.Add(backgPanel);
-            Controls.Add(panelShowBalance);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");

@@ -10,6 +10,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+//JSON
+using System.Text.Json;
+using System.IO;
+
+
 namespace Bank_System_App
 {
     public partial class HomeMain : Form
@@ -38,11 +44,20 @@ namespace Bank_System_App
             MessageBox.Show("المبلغ الذي ادخلته اكبر من رصيدك الحالي!");
         }
 
-        public HomeMain(string nameFromForm1, float balance , string Validity)
+        public HomeMain(string nameFromForm1, float balance, string Validity)
         {
             InitializeComponent();
 
-            if (Validity == "User")
+            if (Validity == "Admin")
+            {
+                panelBalanceSmall.Hide();
+                panelDashboard.Hide();
+                panelDeposit.Hide();
+                panelMenu.Hide();
+                panelTransferSmall.Hide();
+                panelWithdraw.Hide();
+            }
+            else if (Validity == "User")
             {
                 menuStrip1.Hide();
             }
@@ -59,15 +74,12 @@ namespace Bank_System_App
 
 
 
-            
+
             // تمكين DoubleBuffering لمنع الوميض
             this.DoubleBuffered = true;
         }
 
-        public HomeMain(string name)
-        {
-            Name = name;
-        }
+
 
         // دالة لتقوس بانل واحد
         public void RoundPanel(Panel panel, int radius = 20)
@@ -94,8 +106,9 @@ namespace Bank_System_App
             foreach (Control ctrl in parent.Controls)
             {
                 // فقط البانلات باستثناء backgPanel
-                if (ctrl is Panel panel)
+                if (ctrl is Panel panel )
                 {
+                    
                     RoundPanel(panel, radius); // تطبيق نصف القطر الموحد
 
                     // كرر العملية على البانلات الداخلية
@@ -393,6 +406,11 @@ namespace Bank_System_App
             auth LoginForm = new auth();
             this.Hide();
             LoginForm.Show();
+        }
+
+        private void editClientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

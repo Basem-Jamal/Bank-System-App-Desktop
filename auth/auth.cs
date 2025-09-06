@@ -8,6 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//JSON
+using System.Text.Json;
+using System.IO;
+
+
 namespace Bank_System_App
 {
     public partial class auth : Form
@@ -59,13 +64,34 @@ namespace Bank_System_App
         }
         private void Login()
         {
-            AddClient.User user = IsExistUserOrAdmin();
+            AddClient.User User = IsExistUserOrAdmin();
 
-            if (user != null) 
+            AddClient.User Admin = new AddClient.User();
+            //AddClient.User User = new AddClient.User();
+
+
+            //Admin._name     = "Basem";
+            //Admin._password = "123";
+            //Admin._balance  = "1000";
+
+            //User._name = "Basem";
+            //User._password = "123";
+            //User._balance = "1000";
+
+            if (User != null) 
             {
-                MessageBox.Show("Hello " , user._accountNumber);
+
+                if (RadioAdmin.Checked)
+                {
+                    User._validity = "Admin";
+                }
+                else if (RadioUser.Checked)
+                {
+                    User._validity = "User";
+                }
+                MessageBox.Show("Hello " + (User._name));
                 this.Hide();
-                HomeMain HomeFormAdmin = new HomeMain(user._name , 1000, user._Validity);
+                HomeMain HomeFormAdmin = new HomeMain(User._name , 1000, User._validity);
                 HomeFormAdmin.Show();
             }
             else

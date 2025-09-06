@@ -13,8 +13,9 @@ namespace Bank_System_App
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new HomeMain("Basem" , 100, "Admin"));
+            Application.Run(new AddClient());
         }
     }
 }
 //new HomeMain("Basem Jamal", 100.00f)
+//HomeMain("Admin", 2000, "Admin")
