@@ -66,6 +66,14 @@
             editClientToolStripMenuItem = new ToolStripMenuItem();
             showClientToolStripMenuItem = new ToolStripMenuItem();
             backgPanel = new Panel();
+            panel1 = new Panel();
+            labelTotalBalances = new Label();
+            pictureBox5 = new PictureBox();
+            label1 = new Label();
+            label = new Label();
+            panelShowMeNumberOfCurrentClients = new Panel();
+            pictureBox4 = new PictureBox();
+            labelShowMeNumberOfCurrentClients = new Label();
             btnSignOut = new Button();
             panelMenu.SuspendLayout();
             panelShowBalance.SuspendLayout();
@@ -81,6 +89,10 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             menuStrip1.SuspendLayout();
             backgPanel.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            panelShowMeNumberOfCurrentClients.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
             // labelName
@@ -442,6 +454,7 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.ImageScalingSize = new Size(20, 20);
             menuStrip1.Items.AddRange(new ToolStripItem[] { addUsersToolStripMenuItem, editClientToolStripMenuItem, showClientToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
@@ -479,6 +492,10 @@
             // backgPanel
             // 
             backgPanel.BackColor = Color.Gainsboro;
+            backgPanel.Controls.Add(panel1);
+            backgPanel.Controls.Add(label1);
+            backgPanel.Controls.Add(label);
+            backgPanel.Controls.Add(panelShowMeNumberOfCurrentClients);
             backgPanel.Controls.Add(panelDashboard);
             backgPanel.Controls.Add(btnSignOut);
             backgPanel.Controls.Add(panelWithdraw);
@@ -489,14 +506,98 @@
             backgPanel.Dock = DockStyle.Fill;
             backgPanel.Location = new Point(0, 0);
             backgPanel.Name = "backgPanel";
-            backgPanel.Size = new Size(1579, 867);
+            backgPanel.Size = new Size(1579, 791);
             backgPanel.TabIndex = 6;
             backgPanel.Paint += backgPanel_Paint;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(labelTotalBalances);
+            panel1.Controls.Add(pictureBox5);
+            panel1.Location = new Point(508, 253);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(382, 217);
+            panel1.TabIndex = 8;
+            // 
+            // labelTotalBalances
+            // 
+            labelTotalBalances.AutoSize = true;
+            labelTotalBalances.Font = new Font("Segoe UI", 26.25F);
+            labelTotalBalances.Location = new Point(83, 152);
+            labelTotalBalances.Name = "labelTotalBalances";
+            labelTotalBalances.Size = new Size(85, 47);
+            labelTotalBalances.TabIndex = 6;
+            labelTotalBalances.Text = "0.00";
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.BackColor = Color.Transparent;
+            pictureBox5.BackgroundImage = (Image)resources.GetObject("pictureBox5.BackgroundImage");
+            pictureBox5.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox5.Location = new Point(232, 35);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(128, 72);
+            pictureBox5.TabIndex = 7;
+            pictureBox5.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.Snow;
+            label1.Location = new Point(604, 193);
+            label1.Name = "label1";
+            label1.Size = new Size(220, 45);
+            label1.TabIndex = 5;
+            label1.Text = "Total balances";
+            // 
+            // label
+            // 
+            label.AutoSize = true;
+            label.BackColor = Color.Transparent;
+            label.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label.ForeColor = Color.Snow;
+            label.Location = new Point(170, 193);
+            label.Name = "label";
+            label.Size = new Size(99, 45);
+            label.TabIndex = 0;
+            label.Text = "Clints";
+            // 
+            // panelShowMeNumberOfCurrentClients
+            // 
+            panelShowMeNumberOfCurrentClients.Controls.Add(pictureBox4);
+            panelShowMeNumberOfCurrentClients.Controls.Add(labelShowMeNumberOfCurrentClients);
+            panelShowMeNumberOfCurrentClients.Location = new Point(41, 253);
+            panelShowMeNumberOfCurrentClients.Name = "panelShowMeNumberOfCurrentClients";
+            panelShowMeNumberOfCurrentClients.Size = new Size(382, 217);
+            panelShowMeNumberOfCurrentClients.TabIndex = 6;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.BackColor = Color.Transparent;
+            pictureBox4.BackgroundImage = (Image)resources.GetObject("pictureBox4.BackgroundImage");
+            pictureBox4.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox4.Location = new Point(231, 35);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(128, 72);
+            pictureBox4.TabIndex = 4;
+            pictureBox4.TabStop = false;
+            // 
+            // labelShowMeNumberOfCurrentClients
+            // 
+            labelShowMeNumberOfCurrentClients.AutoSize = true;
+            labelShowMeNumberOfCurrentClients.Font = new Font("Segoe UI", 26.25F);
+            labelShowMeNumberOfCurrentClients.Location = new Point(93, 148);
+            labelShowMeNumberOfCurrentClients.Name = "labelShowMeNumberOfCurrentClients";
+            labelShowMeNumberOfCurrentClients.Size = new Size(39, 47);
+            labelShowMeNumberOfCurrentClients.TabIndex = 1;
+            labelShowMeNumberOfCurrentClients.Text = "0";
             // 
             // btnSignOut
             // 
             btnSignOut.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnSignOut.Location = new Point(31, 790);
+            btnSignOut.Location = new Point(33, 720);
             btnSignOut.Name = "btnSignOut";
             btnSignOut.Size = new Size(140, 46);
             btnSignOut.TabIndex = 5;
@@ -510,7 +611,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             BackgroundImageLayout = ImageLayout.Zoom;
-            ClientSize = new Size(1579, 867);
+            ClientSize = new Size(1579, 791);
             Controls.Add(menuStrip1);
             Controls.Add(backgPanel);
             DoubleBuffered = true;
@@ -520,7 +621,6 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "HomeMain";
-            Text = "Form1";
             Load += Home_Load;
             Paint += Home_Main;
             panelMenu.ResumeLayout(false);
@@ -544,6 +644,13 @@
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             backgPanel.ResumeLayout(false);
+            backgPanel.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            panelShowMeNumberOfCurrentClients.ResumeLayout(false);
+            panelShowMeNumberOfCurrentClients.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -588,5 +695,13 @@
         private ToolStripMenuItem showClientToolStripMenuItem;
         private Panel backgPanel;
         private Button btnSignOut;
+        private Panel panelShowMeNumberOfCurrentClients;
+        private Label labelShowMeNumberOfCurrentClients;
+        private Label label;
+        private PictureBox pictureBox4;
+        private Label label1;
+        private Label labelTotalBalances;
+        private PictureBox pictureBox5;
+        private Panel panel1;
     }
 }

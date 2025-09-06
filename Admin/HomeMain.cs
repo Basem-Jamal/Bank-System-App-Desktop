@@ -14,13 +14,19 @@ using System.Windows.Forms;
 //JSON
 using System.Text.Json;
 using System.IO;
+using Newtonsoft.Json;
 
 
 namespace Bank_System_App
 {
+
     public partial class HomeMain : Form
     {
         public static List<AddClient.User> users = new List<AddClient.User>();
+
+        string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";
+        //Path Home PC
+        //string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
 
         enum enTransaction
         {
@@ -29,6 +35,7 @@ namespace Bank_System_App
             enWithdraw = 2
         }
 
+        string currentUsername = "";
         float currentBalance;
         float calculatorWithdraw = 0.00f;
         decimal counterDeposit = 3;
@@ -44,12 +51,15 @@ namespace Bank_System_App
             MessageBox.Show("المبلغ الذي ادخلته اكبر من رصيدك الحالي!");
         }
 
-        public HomeMain(string nameFromForm1, float balance, string Validity)
+        
+        public HomeMain(string nameFromForm1, string username, float balance, string Validity)
         {
             InitializeComponent();
 
             if (Validity == "Admin")
             {
+                LoadUsers();
+                UpdateAdminDashboardStats();
                 panelBalanceSmall.Hide();
                 panelDashboard.Hide();
                 panelDeposit.Hide();
@@ -60,7 +70,11 @@ namespace Bank_System_App
             else if (Validity == "User")
             {
                 menuStrip1.Hide();
+                panelShowMeNumberOfCurrentClients.Hide();
             }
+
+            currentUsername = username;
+
             labelName.Text = nameFromForm1;
             currentBalance = balance;
             labelBalance.Text = currentBalance.ToString("F2") + "SR";
@@ -74,12 +88,53 @@ namespace Bank_System_App
 
 
 
-
             // تمكين DoubleBuffering لمنع الوميض
             this.DoubleBuffered = true;
         }
 
+        private void LoadUsers ()
+        {
+            if (File.Exists(filePath))
+            {
+                string jsonData = File.ReadAllText(filePath);
 
+                users = JsonConvert.DeserializeObject<List<AddClient.User>>(jsonData);
+
+            }
+        }
+        private void UpdateAdminDashboardStats()
+        {
+           int count = users.Count;
+           labelShowMeNumberOfCurrentClients.Text = count.ToString();
+
+           //Calculator Balances
+           float total = 0.00f;
+           foreach(var user in users)
+           {
+               total += user._balance;
+           }
+
+           labelTotalBalances.Text = total.ToString("F2") + "ر.س";
+            
+        }
+
+        private void UpdateBalanceAfterDeposit (string currentUsername, float newBalance)
+        {
+            string jsonData = File.ReadAllText(filePath);
+            var users = JsonConvert.DeserializeObject<List<AddClient.User>>(jsonData);
+
+
+            var user = users.FirstOrDefault(u => u._username == currentUsername);
+
+            if (user != null)
+            {
+                user._balance = newBalance;
+
+                string updatedJson = JsonConvert.SerializeObject(users, Formatting.Indented);
+                File.WriteAllText(filePath, updatedJson);
+
+            }
+        }
 
         // دالة لتقوس بانل واحد
         public void RoundPanel(Panel panel, int radius = 20)
@@ -106,9 +161,9 @@ namespace Bank_System_App
             foreach (Control ctrl in parent.Controls)
             {
                 // فقط البانلات باستثناء backgPanel
-                if (ctrl is Panel panel )
+                if (ctrl is Panel panel)
                 {
-                    
+
                     RoundPanel(panel, radius); // تطبيق نصف القطر الموحد
 
                     // كرر العملية على البانلات الداخلية
@@ -209,6 +264,9 @@ namespace Bank_System_App
                     InputDeposit.Clear();
 
                     labelCountForDeposit.Text = counterDeposit.ToString();
+
+                    UpdateBalanceAfterDeposit(currentUsername, currentBalance);
+
 
                     if (counterDeposit == 2)
                     {
@@ -409,6 +467,11 @@ namespace Bank_System_App
         }
 
         private void editClientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void titleTransferInDashboard_Click(object sender, EventArgs e)
         {
 
         }

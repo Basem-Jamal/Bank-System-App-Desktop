@@ -6,38 +6,48 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Bank_System_App
 {
     public partial class ShowClient : Form
     {
-        public static List<User> users = new List<User>();
+        string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";
+
+        public static List<AddClient.User> users = new List<AddClient.User>();
 
         public ShowClient()
         {
             InitializeComponent();
-            InitializeDataGrid(); // تهيئة الأعمدة
 
         }
 
         private void ShowClient_Load(object sender, EventArgs e)
         {
-            //// إنشاء جدول مؤقت لعرض البيانات
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("Name");
-            //dt.Columns.Add("Password");
-            //dt.Columns.Add("Account Number");
-            //dt.Columns.Add("Balance");
+            InitializeDataGrid();
+            LoadDataFromFileJson();
 
-            //foreach (var user in users)
-            //{
-            //    dt.Rows.Add(user._name, user._password, user._accountNumber, user._balance);
-            //}
+        }
 
-            //// ربط الجدول بـ DataGridView (افترض أنك ضفت DataGridView في الفورم اسمه dataGridView1)
-            //dataGridViewClient.DataSource = dt;
+        private void LoadDataFromFileJson()
+        {
+            if (File.Exists(filePath))
+            {
+                string jsonData = File.ReadAllText(filePath);
+                users = JsonConvert.DeserializeObject<List<AddClient.User>>(jsonData);
+
+            }
+            else
+            {
+                MessageBox.Show("ملف JSON غير موجود!");
+                return;
+            }
+
+            DisplayClients(users);
 
         }
 
@@ -60,7 +70,9 @@ namespace Bank_System_App
             {
                 dataGridViewClient.Rows.Add(user._name, user._password, user._accountNumber, user._balance);
             }
+
             this.Show();
+
         }
 
     }

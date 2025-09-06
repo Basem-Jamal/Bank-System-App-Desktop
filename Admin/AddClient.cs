@@ -17,7 +17,14 @@ namespace Bank_System_App
 {
     public partial class AddClient : Form
     {
-        string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
+        //string filePath = @"C:\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";
+
+        string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";
+
+
+
+         //Path Home PC
+        //string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
         public class User
         {
 
@@ -25,7 +32,7 @@ namespace Bank_System_App
             public string _username      { set; get; }
             public string _password      { set; get; }
             public string _accountNumber { set; get; }
-            public string _balance       { set; get; }
+            public float _balance       { set; get; }
             public string _validity      { set; get; }
 
         }
@@ -38,7 +45,7 @@ namespace Bank_System_App
 
         }
 
-        private void Save()
+        private void SaveForAdding()
         {
             List<User> users = new List<User>();
 
@@ -62,18 +69,20 @@ namespace Bank_System_App
                 return;
             }
 
-            var existingUser = users.FirstOrDefault(u => u._username == InputUserName.Text && u._accountNumber == InputNewAccountNumber.Text);
+            var existingUser = users.FirstOrDefault(u => u._username == InputUserName.Text);
             if (existingUser != null)
             {
                 MessageBox.Show("اسم المستخدم موجود بالفعل! يرجى اختيار اسم آخر.", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return; // إيقاف عملية الحفظ
 
             }
+
+            
             var u = new User {
                 _name = InputUserName.Text,
                 _username = InputUserName.Text,
                 _password = InputNewPassword.Text,
-                _balance = InputNewBalance.Text,
+                _balance = 0.00f ,
                 _validity = "User"
             };
 
@@ -98,18 +107,7 @@ namespace Bank_System_App
         private void button1_Click(object sender, EventArgs e)
         {
 
-            Save();
-
-            // إنشاء الفورم الثاني وعرض كل العملاء
-            string jsonData = File.ReadAllText(filePath);
-            var users = JsonSerializer.Deserialize<List<User>>(jsonData);
-
-
-            ShowClient showForm = new ShowClient();
-            showForm.DisplayClients(HomeMain.users);
-
-            //auth saveInAuth = new auth();
-
+            SaveForAdding();
             this.Close(); // يغلق الفورم بعد حفظ العميل
 
         }

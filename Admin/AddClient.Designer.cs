@@ -46,9 +46,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(407, 50);
+            label1.Location = new Point(465, 67);
             label1.Name = "label1";
-            label1.Size = new Size(278, 50);
+            label1.Size = new Size(352, 62);
             label1.TabIndex = 0;
             label1.Text = "Add New Client";
             // 
@@ -56,9 +56,9 @@
             // 
             LabelNewNameUser.AutoSize = true;
             LabelNewNameUser.Font = new Font("Segoe UI", 20.25F);
-            LabelNewNameUser.Location = new Point(314, 217);
+            LabelNewNameUser.Location = new Point(359, 289);
             LabelNewNameUser.Name = "LabelNewNameUser";
-            LabelNewNameUser.Size = new Size(88, 37);
+            LabelNewNameUser.Size = new Size(109, 46);
             LabelNewNameUser.TabIndex = 1;
             LabelNewNameUser.Text = "Name";
             // 
@@ -66,9 +66,9 @@
             // 
             LabelNewPasswordUser.AutoSize = true;
             LabelNewPasswordUser.Font = new Font("Segoe UI", 20.25F);
-            LabelNewPasswordUser.Location = new Point(314, 341);
+            LabelNewPasswordUser.Location = new Point(359, 455);
             LabelNewPasswordUser.Name = "LabelNewPasswordUser";
-            LabelNewPasswordUser.Size = new Size(128, 37);
+            LabelNewPasswordUser.Size = new Size(160, 46);
             LabelNewPasswordUser.TabIndex = 2;
             LabelNewPasswordUser.Tag = "";
             LabelNewPasswordUser.Text = "Password";
@@ -77,9 +77,9 @@
             // 
             LabelNewAccountNumber.AutoSize = true;
             LabelNewAccountNumber.Font = new Font("Segoe UI", 20.25F);
-            LabelNewAccountNumber.Location = new Point(314, 401);
+            LabelNewAccountNumber.Location = new Point(359, 535);
             LabelNewAccountNumber.Name = "LabelNewAccountNumber";
-            LabelNewAccountNumber.Size = new Size(210, 37);
+            LabelNewAccountNumber.Size = new Size(267, 46);
             LabelNewAccountNumber.TabIndex = 3;
             LabelNewAccountNumber.Text = "AccountNumber";
             LabelNewAccountNumber.Visible = false;
@@ -88,9 +88,9 @@
             // 
             LabelNewBalance.AutoSize = true;
             LabelNewBalance.Font = new Font("Segoe UI", 20.25F);
-            LabelNewBalance.Location = new Point(314, 461);
+            LabelNewBalance.Location = new Point(359, 615);
             LabelNewBalance.Name = "LabelNewBalance";
-            LabelNewBalance.Size = new Size(108, 37);
+            LabelNewBalance.Size = new Size(134, 46);
             LabelNewBalance.TabIndex = 4;
             LabelNewBalance.Text = "Balance";
             LabelNewBalance.Visible = false;
@@ -98,49 +98,54 @@
             // InputUserName
             // 
             InputUserName.Font = new Font("Segoe UI", 18F);
-            InputUserName.Location = new Point(543, 281);
+            InputUserName.Location = new Point(621, 375);
+            InputUserName.Margin = new Padding(3, 4, 3, 4);
             InputUserName.Multiline = true;
             InputUserName.Name = "InputUserName";
-            InputUserName.Size = new Size(240, 37);
-            InputUserName.TabIndex = 5;
+            InputUserName.Size = new Size(274, 48);
+            InputUserName.TabIndex = 2;
             // 
             // InputNewPassword
             // 
             InputNewPassword.Font = new Font("Segoe UI", 18F);
-            InputNewPassword.Location = new Point(543, 341);
+            InputNewPassword.Location = new Point(621, 455);
+            InputNewPassword.Margin = new Padding(3, 4, 3, 4);
             InputNewPassword.Multiline = true;
             InputNewPassword.Name = "InputNewPassword";
-            InputNewPassword.Size = new Size(240, 37);
-            InputNewPassword.TabIndex = 6;
+            InputNewPassword.Size = new Size(274, 48);
+            InputNewPassword.TabIndex = 3;
             // 
             // InputNewAccountNumber
             // 
             InputNewAccountNumber.Font = new Font("Segoe UI", 18F);
-            InputNewAccountNumber.Location = new Point(543, 401);
+            InputNewAccountNumber.Location = new Point(621, 535);
+            InputNewAccountNumber.Margin = new Padding(3, 4, 3, 4);
             InputNewAccountNumber.Multiline = true;
             InputNewAccountNumber.Name = "InputNewAccountNumber";
             InputNewAccountNumber.ReadOnly = true;
-            InputNewAccountNumber.Size = new Size(240, 37);
+            InputNewAccountNumber.Size = new Size(274, 48);
             InputNewAccountNumber.TabIndex = 7;
             InputNewAccountNumber.Visible = false;
             // 
             // InputNewBalance
             // 
             InputNewBalance.Font = new Font("Segoe UI", 18F);
-            InputNewBalance.Location = new Point(543, 461);
+            InputNewBalance.Location = new Point(621, 615);
+            InputNewBalance.Margin = new Padding(3, 4, 3, 4);
             InputNewBalance.Multiline = true;
             InputNewBalance.Name = "InputNewBalance";
-            InputNewBalance.Size = new Size(240, 37);
+            InputNewBalance.Size = new Size(274, 48);
             InputNewBalance.TabIndex = 8;
             InputNewBalance.Visible = false;
             // 
             // button1
             // 
             button1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(543, 518);
+            button1.Location = new Point(621, 691);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(215, 69);
-            button1.TabIndex = 9;
+            button1.Size = new Size(246, 92);
+            button1.TabIndex = 4;
             button1.Text = "Add";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
@@ -149,26 +154,28 @@
             // 
             labelUserName.AutoSize = true;
             labelUserName.Font = new Font("Segoe UI", 20.25F);
-            labelUserName.Location = new Point(314, 280);
+            labelUserName.Location = new Point(359, 373);
             labelUserName.Name = "labelUserName";
-            labelUserName.Size = new Size(141, 37);
+            labelUserName.Size = new Size(176, 46);
             labelUserName.TabIndex = 10;
             labelUserName.Text = "UserName";
             // 
             // InputNameUser
             // 
             InputNameUser.Font = new Font("Segoe UI", 18F);
-            InputNameUser.Location = new Point(543, 218);
+            InputNameUser.Location = new Point(621, 291);
+            InputNameUser.Margin = new Padding(3, 4, 3, 4);
             InputNameUser.Multiline = true;
             InputNameUser.Name = "InputNameUser";
-            InputNameUser.Size = new Size(240, 37);
-            InputNameUser.TabIndex = 11;
+            InputNameUser.Size = new Size(274, 48);
+            InputNameUser.TabIndex = 1;
+            InputNameUser.Tag = "";
             // 
             // AddClient
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1076, 677);
+            ClientSize = new Size(1230, 903);
             Controls.Add(InputNameUser);
             Controls.Add(labelUserName);
             Controls.Add(button1);
@@ -181,6 +188,7 @@
             Controls.Add(LabelNewPasswordUser);
             Controls.Add(LabelNewNameUser);
             Controls.Add(label1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "AddClient";
             Text = "AddClient";
             ResumeLayout(false);

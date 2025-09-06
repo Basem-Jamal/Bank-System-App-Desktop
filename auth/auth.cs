@@ -11,6 +11,7 @@ using System.Windows.Forms;
 //JSON
 using System.Text.Json;
 using System.IO;
+using Microsoft.VisualBasic.ApplicationServices;
 
 
 namespace Bank_System_App
@@ -36,30 +37,41 @@ namespace Bank_System_App
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(InputPassword.Text))
-            {
-                MessageBox.Show("الرجاء إدخال كلمة المرور.");
-                return false;
-            }
-
-            if (!RadioAdmin.Checked && !RadioUser.Checked)
-            {
-                MessageBox.Show("الرجاء اختيار نوع المستخدم.");
-                return false;
-
-            }
-
             return true;
         }
         private AddClient.User IsExistUserOrAdmin()
         {
+
             string username = InputUsername.Text;
             string password = InputPassword.Text;
-            string role = RadioAdmin.Checked ? "Admin" : "Client"; // أو حسب RadioButton
 
-            return HomeMain.users.Find(u =>
-                u._name == username && u._password == password
-            );
+
+            List<AddClient.User> users = new List<AddClient.User>();
+            string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";
+            //Path Home PC
+            //string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
+
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("للاسف الملف غير موجود لعرض العملاء");
+                return null;
+            }
+
+
+            string jsonData = File.ReadAllText(filePath);
+            users = JsonSerializer.Deserialize<List<AddClient.User>>(jsonData);
+
+
+            var existingUser = users.FirstOrDefault(u => u._username == InputUsername.Text && u._password == InputPassword.Text);
+            if (existingUser == null)
+            {
+                MessageBox.Show("Username Or Password Is Flide!");
+                return null;
+
+            }
+
+            return existingUser;
+
 
         }
         private void Login()
@@ -67,31 +79,13 @@ namespace Bank_System_App
             AddClient.User User = IsExistUserOrAdmin();
 
             AddClient.User Admin = new AddClient.User();
-            //AddClient.User User = new AddClient.User();
 
-
-            //Admin._name     = "Basem";
-            //Admin._password = "123";
-            //Admin._balance  = "1000";
-
-            //User._name = "Basem";
-            //User._password = "123";
-            //User._balance = "1000";
-
-            if (User != null) 
+            if (User != null)
             {
 
-                if (RadioAdmin.Checked)
-                {
-                    User._validity = "Admin";
-                }
-                else if (RadioUser.Checked)
-                {
-                    User._validity = "User";
-                }
                 MessageBox.Show("Hello " + (User._name));
                 this.Hide();
-                HomeMain HomeFormAdmin = new HomeMain(User._name , 1000, User._validity);
+                HomeMain HomeFormAdmin = new HomeMain(User._name, User._username ,User._balance, User._validity);
                 HomeFormAdmin.Show();
             }
             else

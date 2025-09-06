@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            RadioUser = new RadioButton();
-            RadioAdmin = new RadioButton();
             btnLogin = new Button();
             InputPassword = new TextBox();
             InputUsername = new TextBox();
@@ -48,37 +46,13 @@
             label1.TabIndex = 0;
             label1.Text = "Welcome Back";
             // 
-            // RadioUser
-            // 
-            RadioUser.AutoSize = true;
-            RadioUser.Font = new Font("Segoe UI", 14.25F);
-            RadioUser.Location = new Point(313, 502);
-            RadioUser.Name = "RadioUser";
-            RadioUser.Size = new Size(68, 29);
-            RadioUser.TabIndex = 3;
-            RadioUser.TabStop = true;
-            RadioUser.Text = "User";
-            RadioUser.UseVisualStyleBackColor = true;
-            // 
-            // RadioAdmin
-            // 
-            RadioAdmin.AutoSize = true;
-            RadioAdmin.Font = new Font("Segoe UI", 14.25F);
-            RadioAdmin.Location = new Point(612, 502);
-            RadioAdmin.Name = "RadioAdmin";
-            RadioAdmin.Size = new Size(85, 29);
-            RadioAdmin.TabIndex = 4;
-            RadioAdmin.TabStop = true;
-            RadioAdmin.Text = "Admin";
-            RadioAdmin.UseVisualStyleBackColor = true;
-            // 
             // btnLogin
             // 
             btnLogin.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnLogin.Location = new Point(420, 422);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(173, 45);
-            btnLogin.TabIndex = 5;
+            btnLogin.TabIndex = 3;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += btnLogin_Click;
@@ -90,7 +64,7 @@
             InputPassword.Multiline = true;
             InputPassword.Name = "InputPassword";
             InputPassword.Size = new Size(234, 50);
-            InputPassword.TabIndex = 6;
+            InputPassword.TabIndex = 2;
             // 
             // InputUsername
             // 
@@ -99,7 +73,7 @@
             InputUsername.Multiline = true;
             InputUsername.Name = "InputUsername";
             InputUsername.Size = new Size(234, 50);
-            InputUsername.TabIndex = 7;
+            InputUsername.TabIndex = 1;
             // 
             // label2
             // 
@@ -131,8 +105,6 @@
             Controls.Add(InputUsername);
             Controls.Add(InputPassword);
             Controls.Add(btnLogin);
-            Controls.Add(RadioAdmin);
-            Controls.Add(RadioUser);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "auth";
@@ -145,8 +117,6 @@
         #endregion
 
         private Label label1;
-        private RadioButton RadioUser;
-        private RadioButton RadioAdmin;
         private Button btnLogin;
         private TextBox InputPassword;
         private TextBox InputUsername;
