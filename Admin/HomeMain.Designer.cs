@@ -51,6 +51,7 @@
             confirm_withdraw = new Button();
             titleWithdraw = new Label();
             panelInfoContact = new Panel();
+            pictureBox6 = new PictureBox();
             welcomeName = new Label();
             panelWithdrawSmall = new Panel();
             pictureBox1 = new PictureBox();
@@ -66,15 +67,16 @@
             editClientToolStripMenuItem = new ToolStripMenuItem();
             showClientToolStripMenuItem = new ToolStripMenuItem();
             backgPanel = new Panel();
-            panel1 = new Panel();
+            panelShowMeTotalBalances = new Panel();
             labelTotalBalances = new Label();
             pictureBox5 = new PictureBox();
-            label1 = new Label();
-            label = new Label();
+            labelTitleTotalBalances = new Label();
+            labelTitleNumberOfClients = new Label();
             panelShowMeNumberOfCurrentClients = new Panel();
             pictureBox4 = new PictureBox();
             labelShowMeNumberOfCurrentClients = new Label();
             btnSignOut = new Button();
+            showTransfer = new Button();
             panelMenu.SuspendLayout();
             panelShowBalance.SuspendLayout();
             panelBalanceSmall.SuspendLayout();
@@ -82,6 +84,7 @@
             panelDeposit.SuspendLayout();
             panelWithdraw.SuspendLayout();
             panelInfoContact.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             panelWithdrawSmall.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelDashboard.SuspendLayout();
@@ -89,7 +92,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             menuStrip1.SuspendLayout();
             backgPanel.SuspendLayout();
-            panel1.SuspendLayout();
+            panelShowMeTotalBalances.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panelShowMeNumberOfCurrentClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -100,7 +103,7 @@
             labelName.AutoSize = true;
             labelName.BackColor = Color.Transparent;
             labelName.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelName.Location = new Point(280, 43);
+            labelName.Location = new Point(248, 41);
             labelName.Name = "labelName";
             labelName.Size = new Size(176, 37);
             labelName.TabIndex = 0;
@@ -109,12 +112,13 @@
             // panelMenu
             // 
             panelMenu.BackColor = Color.Transparent;
+            panelMenu.Controls.Add(showTransfer);
             panelMenu.Controls.Add(showWithdraw);
             panelMenu.Controls.Add(showDeposit);
             panelMenu.Controls.Add(showBalance);
             panelMenu.Location = new Point(12, 53);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(843, 137);
+            panelMenu.Size = new Size(901, 137);
             panelMenu.TabIndex = 1;
             panelMenu.Paint += panelMenu_Paint;
             // 
@@ -122,9 +126,9 @@
             // 
             showWithdraw.Cursor = Cursors.Hand;
             showWithdraw.Font = new Font("Segoe UI", 18F);
-            showWithdraw.Location = new Point(496, 31);
+            showWithdraw.Location = new Point(479, 36);
             showWithdraw.Name = "showWithdraw";
-            showWithdraw.Size = new Size(188, 53);
+            showWithdraw.Size = new Size(185, 50);
             showWithdraw.TabIndex = 2;
             showWithdraw.Text = "Withdraw";
             showWithdraw.UseVisualStyleBackColor = true;
@@ -134,9 +138,9 @@
             // 
             showDeposit.Cursor = Cursors.Hand;
             showDeposit.Font = new Font("Segoe UI", 18F);
-            showDeposit.Location = new Point(260, 29);
+            showDeposit.Location = new Point(260, 36);
             showDeposit.Name = "showDeposit";
-            showDeposit.Size = new Size(188, 53);
+            showDeposit.Size = new Size(185, 50);
             showDeposit.TabIndex = 1;
             showDeposit.Text = "Deposit";
             showDeposit.UseVisualStyleBackColor = true;
@@ -146,9 +150,9 @@
             // 
             showBalance.Cursor = Cursors.Hand;
             showBalance.Font = new Font("Segoe UI", 18F);
-            showBalance.Location = new Point(21, 28);
+            showBalance.Location = new Point(21, 22);
             showBalance.Name = "showBalance";
-            showBalance.Size = new Size(218, 58);
+            showBalance.Size = new Size(216, 79);
             showBalance.TabIndex = 0;
             showBalance.Text = "Show Me Balance";
             showBalance.UseVisualStyleBackColor = true;
@@ -340,24 +344,36 @@
             // panelInfoContact
             // 
             panelInfoContact.BackColor = Color.Transparent;
+            panelInfoContact.Controls.Add(pictureBox6);
             panelInfoContact.Controls.Add(welcomeName);
             panelInfoContact.Controls.Add(labelName);
-            panelInfoContact.Location = new Point(1031, 53);
+            panelInfoContact.Location = new Point(969, 53);
             panelInfoContact.Name = "panelInfoContact";
-            panelInfoContact.Size = new Size(478, 137);
+            panelInfoContact.Size = new Size(540, 137);
             panelInfoContact.TabIndex = 4;
             panelInfoContact.Paint += panelInfoContact_Paint;
+            // 
+            // pictureBox6
+            // 
+            pictureBox6.BackColor = Color.Transparent;
+            pictureBox6.BackgroundImage = (Image)resources.GetObject("pictureBox6.BackgroundImage");
+            pictureBox6.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox6.Location = new Point(401, 28);
+            pictureBox6.Name = "pictureBox6";
+            pictureBox6.Size = new Size(118, 58);
+            pictureBox6.TabIndex = 8;
+            pictureBox6.TabStop = false;
             // 
             // welcomeName
             // 
             welcomeName.AutoSize = true;
             welcomeName.BackColor = Color.Transparent;
             welcomeName.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            welcomeName.Location = new Point(50, 35);
+            welcomeName.Location = new Point(75, 35);
             welcomeName.Name = "welcomeName";
-            welcomeName.Size = new Size(235, 45);
+            welcomeName.Size = new Size(148, 45);
             welcomeName.TabIndex = 0;
-            welcomeName.Text = "welcomeName";
+            welcomeName.Text = "welcome";
             // 
             // panelWithdrawSmall
             // 
@@ -492,9 +508,9 @@
             // backgPanel
             // 
             backgPanel.BackColor = Color.Gainsboro;
-            backgPanel.Controls.Add(panel1);
-            backgPanel.Controls.Add(label1);
-            backgPanel.Controls.Add(label);
+            backgPanel.Controls.Add(panelShowMeTotalBalances);
+            backgPanel.Controls.Add(labelTitleTotalBalances);
+            backgPanel.Controls.Add(labelTitleNumberOfClients);
             backgPanel.Controls.Add(panelShowMeNumberOfCurrentClients);
             backgPanel.Controls.Add(panelDashboard);
             backgPanel.Controls.Add(btnSignOut);
@@ -510,14 +526,14 @@
             backgPanel.TabIndex = 6;
             backgPanel.Paint += backgPanel_Paint;
             // 
-            // panel1
+            // panelShowMeTotalBalances
             // 
-            panel1.Controls.Add(labelTotalBalances);
-            panel1.Controls.Add(pictureBox5);
-            panel1.Location = new Point(508, 253);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(382, 217);
-            panel1.TabIndex = 8;
+            panelShowMeTotalBalances.Controls.Add(labelTotalBalances);
+            panelShowMeTotalBalances.Controls.Add(pictureBox5);
+            panelShowMeTotalBalances.Location = new Point(508, 253);
+            panelShowMeTotalBalances.Name = "panelShowMeTotalBalances";
+            panelShowMeTotalBalances.Size = new Size(382, 217);
+            panelShowMeTotalBalances.TabIndex = 8;
             // 
             // labelTotalBalances
             // 
@@ -540,29 +556,29 @@
             pictureBox5.TabIndex = 7;
             pictureBox5.TabStop = false;
             // 
-            // label1
+            // labelTitleTotalBalances
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.Snow;
-            label1.Location = new Point(604, 193);
-            label1.Name = "label1";
-            label1.Size = new Size(220, 45);
-            label1.TabIndex = 5;
-            label1.Text = "Total balances";
+            labelTitleTotalBalances.AutoSize = true;
+            labelTitleTotalBalances.BackColor = Color.Transparent;
+            labelTitleTotalBalances.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelTitleTotalBalances.ForeColor = Color.Snow;
+            labelTitleTotalBalances.Location = new Point(604, 193);
+            labelTitleTotalBalances.Name = "labelTitleTotalBalances";
+            labelTitleTotalBalances.Size = new Size(220, 45);
+            labelTitleTotalBalances.TabIndex = 5;
+            labelTitleTotalBalances.Text = "Total balances";
             // 
-            // label
+            // labelTitleNumberOfClients
             // 
-            label.AutoSize = true;
-            label.BackColor = Color.Transparent;
-            label.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label.ForeColor = Color.Snow;
-            label.Location = new Point(170, 193);
-            label.Name = "label";
-            label.Size = new Size(99, 45);
-            label.TabIndex = 0;
-            label.Text = "Clints";
+            labelTitleNumberOfClients.AutoSize = true;
+            labelTitleNumberOfClients.BackColor = Color.Transparent;
+            labelTitleNumberOfClients.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelTitleNumberOfClients.ForeColor = Color.Snow;
+            labelTitleNumberOfClients.Location = new Point(170, 193);
+            labelTitleNumberOfClients.Name = "labelTitleNumberOfClients";
+            labelTitleNumberOfClients.Size = new Size(99, 45);
+            labelTitleNumberOfClients.TabIndex = 0;
+            labelTitleNumberOfClients.Text = "Clints";
             // 
             // panelShowMeNumberOfCurrentClients
             // 
@@ -605,6 +621,17 @@
             btnSignOut.UseVisualStyleBackColor = true;
             btnSignOut.Click += btnSignOut_Click;
             // 
+            // showTransfer
+            // 
+            showTransfer.Cursor = Cursors.Hand;
+            showTransfer.Font = new Font("Segoe UI", 18F);
+            showTransfer.Location = new Point(693, 36);
+            showTransfer.Name = "showTransfer";
+            showTransfer.Size = new Size(185, 50);
+            showTransfer.TabIndex = 3;
+            showTransfer.Text = "Transfer";
+            showTransfer.UseVisualStyleBackColor = true;
+            // 
             // HomeMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -634,6 +661,7 @@
             panelWithdraw.PerformLayout();
             panelInfoContact.ResumeLayout(false);
             panelInfoContact.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             panelWithdrawSmall.ResumeLayout(false);
             panelWithdrawSmall.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -645,8 +673,8 @@
             menuStrip1.PerformLayout();
             backgPanel.ResumeLayout(false);
             backgPanel.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            panelShowMeTotalBalances.ResumeLayout(false);
+            panelShowMeTotalBalances.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panelShowMeNumberOfCurrentClients.ResumeLayout(false);
             panelShowMeNumberOfCurrentClients.PerformLayout();
@@ -697,11 +725,13 @@
         private Button btnSignOut;
         private Panel panelShowMeNumberOfCurrentClients;
         private Label labelShowMeNumberOfCurrentClients;
-        private Label label;
+        private Label labelTitleNumberOfClients;
         private PictureBox pictureBox4;
-        private Label label1;
+        private Label labelTitleTotalBalances;
         private Label labelTotalBalances;
         private PictureBox pictureBox5;
-        private Panel panel1;
+        private Panel panelShowMeTotalBalances;
+        private PictureBox pictureBox6;
+        private Button showTransfer;
     }
 }

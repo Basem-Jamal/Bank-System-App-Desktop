@@ -17,14 +17,15 @@ namespace Bank_System_App
 {
     public partial class AddClient : Form
     {
-        //string filePath = @"C:\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";
+        //Path Labtop
+        //string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";\
 
-        string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";
+        //Path Home PC
+
+        string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
 
 
 
-         //Path Home PC
-        //string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
         public class User
         {
 
@@ -36,11 +37,14 @@ namespace Bank_System_App
             public string _validity      { set; get; }
 
         }
+        private HomeMain home; // مرجع للفورم الرئيسي
 
 
-        public AddClient()
+        public AddClient(HomeMain homeForm)
         {
             InitializeComponent();
+            this.home = homeForm;
+
             InputNewPassword.PasswordChar = '*';
 
         }
@@ -101,6 +105,9 @@ namespace Bank_System_App
 
             string newJsonData = JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(filePath, newJsonData);
+
+            MessageBox.Show("تم اضافة العميل بنجاح" , "البنك");
+
         }
 
 
@@ -108,6 +115,9 @@ namespace Bank_System_App
         {
 
             SaveForAdding();
+
+            home.RefreshDashboard(); // دالة موجودة في HomeMain
+
             this.Close(); // يغلق الفورم بعد حفظ العميل
 
         }

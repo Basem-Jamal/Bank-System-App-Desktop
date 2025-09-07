@@ -24,9 +24,11 @@ namespace Bank_System_App
     {
         public static List<AddClient.User> users = new List<AddClient.User>();
 
-        string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";
+        //Path Labtop
+        //string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";\
+
         //Path Home PC
-        //string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
+        string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
 
         enum enTransaction
         {
@@ -35,8 +37,10 @@ namespace Bank_System_App
             enWithdraw = 2
         }
 
-        string currentUsername = "";
-        float currentBalance;
+        public string currentName = "";
+        public string currentUsername = "";
+        public string currentValidity = "";
+        public float currentBalance;
         float calculatorWithdraw = 0.00f;
         decimal counterDeposit = 3;
         decimal counterWithdraw = 3;
@@ -54,6 +58,7 @@ namespace Bank_System_App
         
         public HomeMain(string nameFromForm1, string username, float balance, string Validity)
         {
+
             InitializeComponent();
 
             if (Validity == "Admin")
@@ -71,9 +76,17 @@ namespace Bank_System_App
             {
                 menuStrip1.Hide();
                 panelShowMeNumberOfCurrentClients.Hide();
+                panelShowMeTotalBalances.Hide();
+                labelTitleTotalBalances.Hide();
+                labelTitleNumberOfClients.Hide();
             }
-
+            currentName     = nameFromForm1;
             currentUsername = username;
+            currentBalance  = balance;
+            currentValidity = Validity;
+
+
+
 
             labelName.Text = nameFromForm1;
             currentBalance = balance;
@@ -114,8 +127,14 @@ namespace Bank_System_App
                total += user._balance;
            }
 
-           labelTotalBalances.Text = total.ToString("F2") + "ر.س";
+           labelTotalBalances.Text = total.ToString("#,##0.00") + "ر.س";
             
+        }
+
+        public void RefreshDashboard()
+        {
+            LoadUsers();               // قراءة الملف مرة أخرى
+            UpdateAdminDashboardStats(); // تحديث عدد العملاء والرصيد الإجمالي
         }
 
         private void UpdateBalanceAfterDeposit (string currentUsername, float newBalance)
@@ -178,11 +197,12 @@ namespace Bank_System_App
         private void Home_Load(object sender, EventArgs e)
         {
             backgPanel.SendToBack();
-
             SetControlsParentToBackgPanel(this);
 
             welcomeName.Text = "Welcome";
             RoundAllPanels(this, 15);
+            UpdateAdminDashboardStats();
+
         }
 
         private void SetControlsParentToBackgPanel(Control parent)
@@ -448,7 +468,7 @@ namespace Bank_System_App
         //Mange Users ( Add - Edit )
         private void newClientToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddClient C = new AddClient();
+            AddClient C = new AddClient(this);
             C.ShowDialog();
         }
 

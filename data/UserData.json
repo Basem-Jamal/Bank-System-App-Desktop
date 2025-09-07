@@ -4,7 +4,7 @@
     "_username": "test_10",
     "_password": "123",
     "_accountNumber": "SA100020001862560548",
-    "_balance": 0,
+    "_balance": 0.0,
     "_validity": "Admin"
   },
   {
@@ -12,7 +12,7 @@
     "_username": "ahmed_10",
     "_password": "123",
     "_accountNumber": "SA100020007584681083",
-    "_balance": 7000,
+    "_balance": 7000.0,
     "_validity": "User"
   },
   {
@@ -20,7 +20,31 @@
     "_username": "mona_10",
     "_password": "123",
     "_accountNumber": "SA100020004132166420",
-    "_balance": 0,
+    "_balance": 0.0,
+    "_validity": "User"
+  },
+  {
+    "_name": "sara_10",
+    "_username": "sara_10",
+    "_password": "123",
+    "_accountNumber": "SA100020008757324872",
+    "_balance": 0.0,
+    "_validity": "User"
+  },
+  {
+    "_name": "salem_10",
+    "_username": "salem_10",
+    "_password": "123",
+    "_accountNumber": "SA100020007576038233",
+    "_balance": 0.0,
+    "_validity": "User"
+  },
+  {
+    "_name": "loye_10",
+    "_username": "loye_10",
+    "_password": "123",
+    "_accountNumber": "SA100020003176530883",
+    "_balance": 1000000.0,
     "_validity": "User"
   }
 ]

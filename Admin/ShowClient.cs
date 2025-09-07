@@ -16,7 +16,11 @@ namespace Bank_System_App
 {
     public partial class ShowClient : Form
     {
-        string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";
+        //Path Labtop
+        //string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";\
+
+        //Path Home PC
+        string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
 
         public static List<AddClient.User> users = new List<AddClient.User>();
 
@@ -53,11 +57,12 @@ namespace Bank_System_App
 
         private void InitializeDataGrid()
         {
-            dataGridViewClient.ColumnCount = 4;
+            dataGridViewClient.ColumnCount = 5;
             dataGridViewClient.Columns[0].Name = "Name";
             dataGridViewClient.Columns[1].Name = "Password";
             dataGridViewClient.Columns[2].Name = "Account Number";
             dataGridViewClient.Columns[3].Name = "Balance";
+            dataGridViewClient.Columns[4].Name = "validity";
 
             dataGridViewClient.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
@@ -65,10 +70,15 @@ namespace Bank_System_App
         // دالة لتحديث البيانات في DataGridView
         public void DisplayClients(List<AddClient.User> users)
         {
+            if (dataGridViewClient.Columns.Count == 0) // إذا ما فيه أعمدة
+            {
+                InitializeDataGrid(); // أنشئ الأعمدة
+            }
+
             dataGridViewClient.Rows.Clear();
             foreach (var user in users)
             {
-                dataGridViewClient.Rows.Add(user._name, user._password, user._accountNumber, user._balance);
+                dataGridViewClient.Rows.Add(user._name, user._password, user._accountNumber, user._balance, user._validity);
             }
 
             this.Show();
