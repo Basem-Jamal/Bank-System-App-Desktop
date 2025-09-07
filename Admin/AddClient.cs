@@ -17,13 +17,16 @@ namespace Bank_System_App
 {
     public partial class AddClient : Form
     {
+
+        //Shared 
+        string filePath = @"\\26.78.158.132\WarehouseShared\UserData.json";
+
         //Path Labtop
         //string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";\
 
+
         //Path Home PC
-
-        string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
-
+        //string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
 
 
         public class User
