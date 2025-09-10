@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
+
 //JSON
 using System.Text.Json;
 using System.IO;
@@ -22,17 +23,23 @@ namespace Bank_System_App
 
     public partial class HomeMain : Form
     {
+        private FileSystemWatcher watcher;
+        private ShowClient showClientForm;
+
+
         public static List<AddClient.User> users = new List<AddClient.User>();
 
         //Shared 
-        string filePath = @"\\26.78.158.132\WarehouseShared\UserData.json";
+        //string filePath = @"\\26.78.158.132\WarehouseShared\UserData.json";
 
         //Path Labtop
         //string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";\
 
-
         //Path Home PC
         //string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
+
+        //Dynamic 
+        public string filePath = auth.filePath;
 
         enum enTransaction
         {
@@ -41,13 +48,16 @@ namespace Bank_System_App
             enWithdraw = 2
         }
 
-        public string currentName = "";
-        public string currentUsername = "";
-        public string currentValidity = "";
+
+        public string currentName          = "";
+        public string currentUsername      = "";
+        public string currentAccountNumber = "";
+        public string currentValidity      = "";
         public float currentBalance;
-        float calculatorWithdraw = 0.00f;
-        decimal counterDeposit = 3;
-        decimal counterWithdraw = 3;
+
+        float calculatorWithdraw           = 0.00f;
+        decimal counterDeposit             = 3;
+        decimal counterWithdraw            = 3;
 
         static void errorMessage()
         {
@@ -59,14 +69,23 @@ namespace Bank_System_App
             MessageBox.Show("المبلغ الذي ادخلته اكبر من رصيدك الحالي!");
         }
 
-        
-        public HomeMain(string nameFromForm1, string username, float balance, string Validity)
+
+        public HomeMain(string nameFromForm1, string username, string accountNumber, float balance, string Validity)
         {
 
             InitializeComponent();
 
+            watcher = new FileSystemWatcher();
+            watcher.Path = Path.GetDirectoryName(filePath); // مجلد الملف
+            watcher.Filter = Path.GetFileName(filePath);    // اسم الملف فقط
+            watcher.NotifyFilter = NotifyFilters.LastWrite; // لمراقبة أي تعديل
+            watcher.Changed += OnFileChanged;
+            watcher.EnableRaisingEvents = true; // يبدأ المراقبة
+
+
             if (Validity == "Admin")
             {
+                watcher.EnableRaisingEvents = true;
                 LoadUsers();
                 UpdateAdminDashboardStats();
                 panelBalanceSmall.Hide();
@@ -78,16 +97,18 @@ namespace Bank_System_App
             }
             else if (Validity == "User")
             {
+                ReloadStatus.Hide();
                 menuStrip1.Hide();
                 panelShowMeNumberOfCurrentClients.Hide();
                 panelShowMeTotalBalances.Hide();
                 labelTitleTotalBalances.Hide();
                 labelTitleNumberOfClients.Hide();
             }
-            currentName     = nameFromForm1;
-            currentUsername = username;
-            currentBalance  = balance;
-            currentValidity = Validity;
+            currentName          = nameFromForm1;
+            currentUsername      = username;
+            currentAccountNumber = accountNumber;
+            currentBalance       = balance;
+            currentValidity      = Validity;
 
 
 
@@ -109,7 +130,58 @@ namespace Bank_System_App
             this.DoubleBuffered = true;
         }
 
-        private void LoadUsers ()
+        private void Home_Load(object sender, EventArgs e)
+        {
+
+            backgPanel.SendToBack();
+            SetControlsParentToBackgPanel(this);
+
+            welcomeName.Text = "Welcome";
+            RoundAllPanels(this, 15);
+            UpdateAdminDashboardStats();
+
+        }
+
+        private void Home_Main(object sender, PaintEventArgs e)
+        {
+            //// تجنب الرسم عند التصغير
+            backgPanel.Dock = DockStyle.Fill;
+            backgPanel.SendToBack(); // اجعل البانل خلف كل الكنترولز
+
+        }
+
+        private void OnFileChanged(object sender, FileSystemEventArgs e)
+        {
+            this.Invoke(new Action(() =>
+            {
+                try
+                {
+                    // جرب أكثر من مرة لأن الملف ممكن يكون لسه بينكتب
+                    for (int i = 0; i < 3; i++)
+                    {
+                        try
+                        {
+                            string json = File.ReadAllText(filePath);
+                            users = System.Text.Json.JsonSerializer.Deserialize<List<AddClient.User>>(json);
+                            break;
+                        }
+                        catch (IOException)
+                        {
+                            System.Threading.Thread.Sleep(100);
+                        }
+                    }
+
+                    RefreshDashboard();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("خطأ أثناء تحديث البيانات: " + ex.Message);
+                }
+            }));
+        }
+
+        //Update Balance /Admin
+        private void LoadUsers()
         {
             if (File.Exists(filePath))
             {
@@ -121,27 +193,31 @@ namespace Bank_System_App
         }
         private void UpdateAdminDashboardStats()
         {
-           int count = users.Count;
-           labelShowMeNumberOfCurrentClients.Text = count.ToString();
+            int count = users.Count;
+            labelShowMeNumberOfCurrentClients.Text = count.ToString();
 
-           //Calculator Balances
-           float total = 0.00f;
-           foreach(var user in users)
-           {
-               total += user._balance;
-           }
+            //Calculator Balances
+            float total = 0.00f;
+            foreach (var user in users)
+            {
+                total += user._balance;
+            }
 
-           labelTotalBalances.Text = total.ToString("#,##0.00") + "ر.س";
-            
+            labelTotalBalances.Text = total.ToString("#,##0.00") + "ر.س";
+
         }
-
-        public void RefreshDashboard()
+        private void UpdateCustomerRecord()
         {
-            LoadUsers();               // قراءة الملف مرة أخرى
-            UpdateAdminDashboardStats(); // تحديث عدد العملاء والرصيد الإجمالي
-        }
+            if (showClientForm == null || showClientForm.IsDisposed)
+            {
+                showClientForm = new ShowClient();
 
-        private void UpdateBalanceAfterDeposit (string currentUsername, float newBalance)
+            }
+            showClientForm.DisplayClients(users);
+            showClientForm.BringToFront(); // يخلي الفورم فوق
+
+        }
+        private void UpdateBalanceAfterDeposit(string currentUsername, float newBalance)
         {
             string jsonData = File.ReadAllText(filePath);
             var users = JsonConvert.DeserializeObject<List<AddClient.User>>(jsonData);
@@ -151,6 +227,7 @@ namespace Bank_System_App
 
             if (user != null)
             {
+                //MangeTransaction() طبعا هنا ما زودته =+ لانه تم زيادته في 
                 user._balance = newBalance;
 
                 string updatedJson = JsonConvert.SerializeObject(users, Formatting.Indented);
@@ -158,6 +235,32 @@ namespace Bank_System_App
 
             }
         }
+        private void UpdateBalanceAfterWithdraw(string currentUsername, float newBalance)
+        {
+            string jsonData = File.ReadAllText(filePath);
+            var users = JsonConvert.DeserializeObject<List<AddClient.User>>(jsonData);
+
+
+            var user = users.FirstOrDefault(u => u._username == currentUsername);
+
+            if (user != null)
+            {
+
+                //MangeTransaction() طبعا هنا ما نقصته =- لانه تم انقاصه في 
+                user._balance = newBalance;
+
+                string updatedJson = JsonConvert.SerializeObject(users, Formatting.Indented);
+                File.WriteAllText(filePath, updatedJson);
+
+            }
+        }
+        public void RefreshDashboard()
+        {
+            LoadUsers();               // قراءة الملف مرة أخرى
+            UpdateAdminDashboardStats(); // تحديث عدد العملاء والرصيد الإجمالي
+            UpdateCustomerRecord();
+        }
+
 
         // دالة لتقوس بانل واحد
         public void RoundPanel(Panel panel, int radius = 20)
@@ -198,17 +301,6 @@ namespace Bank_System_App
             }
         }
 
-        private void Home_Load(object sender, EventArgs e)
-        {
-            backgPanel.SendToBack();
-            SetControlsParentToBackgPanel(this);
-
-            welcomeName.Text = "Welcome";
-            RoundAllPanels(this, 15);
-            UpdateAdminDashboardStats();
-
-        }
-
         private void SetControlsParentToBackgPanel(Control parent)
         {
             foreach (Control ctrl in parent.Controls)
@@ -237,17 +329,6 @@ namespace Bank_System_App
             }
         }
 
-        private void Home_Main(object sender, PaintEventArgs e)
-        {
-            //// تجنب الرسم عند التصغير
-            backgPanel.Dock = DockStyle.Fill;
-            backgPanel.SendToBack(); // اجعل البانل خلف كل الكنترولز
-
-        }
-
-
-
-
         private void backgPanel_Paint(object sender, PaintEventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
@@ -265,7 +346,6 @@ namespace Bank_System_App
 
         }
 
-
         private void panelMenu_Paint(object sender, PaintEventArgs e)
         {
             panelMenu.BackColor = Color.FromArgb(120, 0, 0, 0);
@@ -276,6 +356,7 @@ namespace Bank_System_App
             panelDashboard.BackColor = Color.FromArgb(120, 0, 0, 0);
         }
 
+        //Mange Transactions
         private void MangeTransaction(enTransaction transactionType)
         {
             if (transactionType == enTransaction.enDeposit)
@@ -338,6 +419,8 @@ namespace Bank_System_App
 
                     labelCountForWithdraw.Text = counterWithdraw.ToString();
 
+                    UpdateBalanceAfterWithdraw(currentUsername, currentBalance);
+
                     if (counterWithdraw == 2)
                     {
                         labelCountForWithdraw.ForeColor = Color.Orange;
@@ -364,6 +447,7 @@ namespace Bank_System_App
             }
         }
 
+        //Btn Menu Transaction
         private void showBalance_Click(object sender, EventArgs e)
         {
             panelShowBalance.Show();
@@ -384,6 +468,13 @@ namespace Bank_System_App
             panelDeposit.Hide();
             panelWithdraw.Show();
         }
+
+        private void ShowTransfer_Click(object sender, EventArgs e)
+        {
+            TransferForm ShowMeTransfer = new TransferForm(this);
+            ShowMeTransfer.Show();
+        }
+
 
         private void confirm_deposit_Click(object sender, EventArgs e)
         {
@@ -499,5 +590,11 @@ namespace Bank_System_App
         {
 
         }
+
+        private void ReloadStatus_Click(object sender, EventArgs e)
+        {
+            this.RefreshDashboard();
+        }
+
     }
 }

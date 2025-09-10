@@ -19,7 +19,7 @@ namespace Bank_System_App
     {
 
         //Shared 
-        string filePath = @"\\26.78.158.132\WarehouseShared\UserData.json";
+        //string filePath = @"\\26.78.158.132\WarehouseShared\UserData.json";
 
         //Path Labtop
         //string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";\
@@ -27,6 +27,10 @@ namespace Bank_System_App
 
         //Path Home PC
         //string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
+
+
+        //Dynamic 
+        public string filePath = auth.filePath;
 
 
         public class User

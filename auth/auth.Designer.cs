@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(auth));
             label1 = new Label();
             btnLogin = new Button();
             InputPassword = new TextBox();
@@ -107,6 +108,7 @@
             Controls.Add(btnLogin);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "auth";
             Text = "auth";
             Load += auth_Load;

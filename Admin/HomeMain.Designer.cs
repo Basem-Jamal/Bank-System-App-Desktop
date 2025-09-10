@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeMain));
             labelName = new Label();
             panelMenu = new Panel();
+            showTransfer = new Button();
             showWithdraw = new Button();
             showDeposit = new Button();
             showBalance = new Button();
@@ -67,6 +68,7 @@
             editClientToolStripMenuItem = new ToolStripMenuItem();
             showClientToolStripMenuItem = new ToolStripMenuItem();
             backgPanel = new Panel();
+            ReloadStatus = new Button();
             panelShowMeTotalBalances = new Panel();
             labelTotalBalances = new Label();
             pictureBox5 = new PictureBox();
@@ -76,7 +78,6 @@
             pictureBox4 = new PictureBox();
             labelShowMeNumberOfCurrentClients = new Label();
             btnSignOut = new Button();
-            showTransfer = new Button();
             panelMenu.SuspendLayout();
             panelShowBalance.SuspendLayout();
             panelBalanceSmall.SuspendLayout();
@@ -121,6 +122,18 @@
             panelMenu.Size = new Size(901, 137);
             panelMenu.TabIndex = 1;
             panelMenu.Paint += panelMenu_Paint;
+            // 
+            // showTransfer
+            // 
+            showTransfer.Cursor = Cursors.Hand;
+            showTransfer.Font = new Font("Segoe UI", 18F);
+            showTransfer.Location = new Point(693, 36);
+            showTransfer.Name = "showTransfer";
+            showTransfer.Size = new Size(185, 50);
+            showTransfer.TabIndex = 3;
+            showTransfer.Text = "Transfer";
+            showTransfer.UseVisualStyleBackColor = true;
+            showTransfer.Click += ShowTransfer_Click;
             // 
             // showWithdraw
             // 
@@ -508,6 +521,7 @@
             // backgPanel
             // 
             backgPanel.BackColor = Color.Gainsboro;
+            backgPanel.Controls.Add(ReloadStatus);
             backgPanel.Controls.Add(panelShowMeTotalBalances);
             backgPanel.Controls.Add(labelTitleTotalBalances);
             backgPanel.Controls.Add(labelTitleNumberOfClients);
@@ -525,6 +539,17 @@
             backgPanel.Size = new Size(1579, 791);
             backgPanel.TabIndex = 6;
             backgPanel.Paint += backgPanel_Paint;
+            // 
+            // ReloadStatus
+            // 
+            ReloadStatus.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ReloadStatus.Location = new Point(719, 27);
+            ReloadStatus.Name = "ReloadStatus";
+            ReloadStatus.Size = new Size(149, 60);
+            ReloadStatus.TabIndex = 9;
+            ReloadStatus.Text = "Reload";
+            ReloadStatus.UseVisualStyleBackColor = true;
+            ReloadStatus.Click += ReloadStatus_Click;
             // 
             // panelShowMeTotalBalances
             // 
@@ -620,17 +645,6 @@
             btnSignOut.Text = "SignOut";
             btnSignOut.UseVisualStyleBackColor = true;
             btnSignOut.Click += btnSignOut_Click;
-            // 
-            // showTransfer
-            // 
-            showTransfer.Cursor = Cursors.Hand;
-            showTransfer.Font = new Font("Segoe UI", 18F);
-            showTransfer.Location = new Point(693, 36);
-            showTransfer.Name = "showTransfer";
-            showTransfer.Size = new Size(185, 50);
-            showTransfer.TabIndex = 3;
-            showTransfer.Text = "Transfer";
-            showTransfer.UseVisualStyleBackColor = true;
             // 
             // HomeMain
             // 
@@ -733,5 +747,6 @@
         private Panel panelShowMeTotalBalances;
         private PictureBox pictureBox6;
         private Button showTransfer;
+        private Button ReloadStatus;
     }
 }

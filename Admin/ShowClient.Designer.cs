@@ -28,37 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridViewClient = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewClient).BeginInit();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShowClient));
+            flowLayoutPanel1 = new FlowLayoutPanel();
             SuspendLayout();
             // 
-            // dataGridViewClient
+            // flowLayoutPanel1
             // 
-            dataGridViewClient.BackgroundColor = SystemColors.ButtonHighlight;
-            dataGridViewClient.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewClient.Location = new Point(40, 101);
-            dataGridViewClient.Margin = new Padding(3, 4, 3, 4);
-            dataGridViewClient.Name = "dataGridViewClient";
-            dataGridViewClient.RowHeadersWidth = 51;
-            dataGridViewClient.Size = new Size(1394, 769);
-            dataGridViewClient.TabIndex = 0;
+            flowLayoutPanel1.Location = new Point(75, 55);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(1146, 618);
+            flowLayoutPanel1.TabIndex = 0;
             // 
             // ShowClient
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1469, 961);
-            Controls.Add(dataGridViewClient);
-            Margin = new Padding(3, 4, 3, 4);
+            ClientSize = new Size(1285, 721);
+            Controls.Add(flowLayoutPanel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ShowClient";
             Text = "ShowClient";
             Load += ShowClient_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridViewClient).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private DataGridView dataGridViewClient;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }

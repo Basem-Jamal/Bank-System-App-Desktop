@@ -18,7 +18,7 @@ namespace Bank_System_App
     {
 
         //Shared 
-        string filePath = @"\\26.78.158.132\WarehouseShared\UserData.json";
+        //string filePath = @"\\26.78.158.132\WarehouseShared\UserData.json";
 
         //Path Labtop
         //string filePath = @"C:\Users\HUAWEI\source\repos\Basem-Jamal\Bank-System-App-Desktop\data\UserData.json";\
@@ -26,6 +26,9 @@ namespace Bank_System_App
 
         //Path Home PC
         //string filePath = @"C:\Users\user\source\repos\14 - C# - Level 1\Desktop app\Bank System App\data\UserData.json";
+
+        //Dynamic 
+        public string filePath = auth.filePath;
 
         public static List<AddClient.User> users = new List<AddClient.User>();
 
@@ -37,10 +40,21 @@ namespace Bank_System_App
 
         private void ShowClient_Load(object sender, EventArgs e)
         {
-            InitializeDataGrid();
             LoadDataFromFileJson();
 
         }
+
+        public void RefreshData()
+        {
+            if (File.Exists(filePath))
+            {
+                string jsonData = File.ReadAllText(filePath);
+                users = JsonConvert.DeserializeObject<List<AddClient.User>>(jsonData);
+
+                DisplayClients(users);
+            }
+        }
+
 
         private void LoadDataFromFileJson()
         {
@@ -60,33 +74,28 @@ namespace Bank_System_App
 
         }
 
-        private void InitializeDataGrid()
-        {
-            dataGridViewClient.ColumnCount = 5;
-            dataGridViewClient.Columns[0].Name = "Name";
-            dataGridViewClient.Columns[1].Name = "Password";
-            dataGridViewClient.Columns[2].Name = "Account Number";
-            dataGridViewClient.Columns[3].Name = "Balance";
-            dataGridViewClient.Columns[4].Name = "validity";
-
-            dataGridViewClient.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-        }
-
-        // دالة لتحديث البيانات في DataGridView
         public void DisplayClients(List<AddClient.User> users)
         {
-            if (dataGridViewClient.Columns.Count == 0) // إذا ما فيه أعمدة
-            {
-                InitializeDataGrid(); // أنشئ الأعمدة
-            }
 
-            dataGridViewClient.Rows.Clear();
+            flowLayoutPanel1.Controls.Clear();
+
             foreach (var user in users)
             {
-                dataGridViewClient.Rows.Add(user._name, user._password, user._accountNumber, user._balance, user._validity);
-            }
+                Panel panel = new Panel();
+                panel.Width = 250;
+                panel.Height = 120;
+                panel.BorderStyle = BorderStyle.FixedSingle;
 
-            this.Show();
+                Label nameLabel = new Label() { Text = "Name: " + user._name, Top = 10, Left = 10 };
+                Label accLabel = new Label() { Text = "Account: " + user._accountNumber, Top = 30, Left = 10 };
+                Label balanceLabel = new Label() { Text = "Balance: " + user._balance, Top = 50, Left = 10 };
+
+                panel.Controls.Add(nameLabel);
+                panel.Controls.Add(accLabel);
+                panel.Controls.Add(balanceLabel);
+
+                flowLayoutPanel1.Controls.Add(panel);
+            }
 
         }
 
